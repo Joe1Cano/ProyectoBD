@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Store</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .navbar-custom {
+        background-color: #639bf0;
+      }
+      
+      .navbar-custom .navbar-brand,
+      .navbar-custom .navbar-nav .nav-link {
+        color: #fff;
+      }
+      
+      .navbar-custom .nav-link:hover {
+        color: #dbe2ef;
+      }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+      <a class="navbar-brand" href="#">Tienda</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/menuC">Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pedido/{{id_u}}">Pedidos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Salir</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1 class="text-center my-5">Bienvenido a mi tienda {{user}}</h1>
+    <div class="row">
+    {% for data in inv %}
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img class="card-img-top" src="{{data[4]}}" alt="Product">
+          <div class="card-body">
+            <h5 class="card-title">{{data[1]}}</h5>
+            <p class="card-text">${{data[2]}}</p>
+            <form action="/subtotal" method="post">
+              <input type="hidden" name="id" value="{{data[0]}}">
+              <input type="hidden" name="name" value="{{data[1]}}">
+              <input type="hidden" name="price" value="{{data[2]}}">
+              <input type="hidden" name="quantity" value="{{data[3]}}">
+              <input type="hidden" name="user" value="{{user}}">
+              <input type="hidden" name="id_u" value="{{id_u}}">
+              <button type="submit" class="btn btn-info">Comprar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    {%endfor%}
+    </div>
+  </div>
+</body>
+</html>

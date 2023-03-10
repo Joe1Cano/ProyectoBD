@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mongo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        /* Custom CSS for the header */
+        .navbar-custom {
+          background-color: #639bf0;
+        }
+        
+        .navbar-custom .navbar-brand,
+        .navbar-custom .navbar-nav .nav-link {
+          color: #fff;
+        }
+        
+        .navbar-custom .nav-link:hover {
+          color: #dbe2ef;
+        }
+      </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-custom">
+          <a class="navbar-brand" href="#">Tienda</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="/menu">Home<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/inv">Inventario</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/mongo">Pedidos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/">Salir</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+    <div class="container">
+        <h1 class="text-center mt-5 mb-5">Pedido</h1>
+    </div>
+    <div class="container">
+        <div>
+            <div>
+                <div class="card">
+                    <div class="card">
+                        <div class="card-header">
+                            Edicion del pedido
+                        </div>
+                        <div class="card-body">
+                            {% for data in pedido %}
+                            <div class="col">
+                                <li class="list-group-item mb-3">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Usuario</th>
+                                                <th>Estado</th>
+                                                <th>Fecha Creada</th>
+                                                <th>Fecha de Entrega</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          <input type="hidden" class="formcontrol" value="{{data[1]}}" name="idU" disabled>
+                                            <td>
+                                                <input type="text" class="formcontrol" value="{{data[2]}}" name="txtNombre" disabled>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="formcontrol" value="{{data[3]}}" name="txtEstado" disabled>
+                                            </td>
+                                            <td>
+                                                <input type="date" class="formcontrol" value="{{data[4]}}" name="txtFechaC" disabled>
+                                            </td>
+                                            <td>
+                                                <input type="date" class="formcontrol" value="{{data[5]}}" name="txtFechaE" disabled>
+                                            </td>
+                                            <td><a class="btn btn-info" href="/mongo/editar/{{data[0]}}">Editar</a> || <a class="btn btn-danger" href="/mongo/delete/{{data[0]}}">Eliminar</a></td>
+                                        </tbody>
+                                    </table>
+                                </li>
+                            </div>
+                            {%endfor%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-success" href="/mongo/create">Crear Pedido</a>
+</body>
+</html>

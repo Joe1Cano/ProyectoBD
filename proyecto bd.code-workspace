@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../apirestcrud"
+		},
+		{
+			"path": "../usuarios"
+		},
+		{
+			"path": "../compras"
+		}
+	],
+	"settings": {}
+}

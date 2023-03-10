@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Compra</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Include Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 mx-auto">
+			<h1>Compra</h1>
+			<form action="/proP" method="post">
+				<div class="form-group">
+					<label for="productName">Producto:</label>
+					<input type="text" class="form-control bg-light" id="productName" value="{{data[1]}}" disabled>
+				</div>
+				<div class="form-group">
+					<label for="productPrice">Precio:</label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text bg-success text-white">$</span>
+						</div>
+						<input type="text" class="form-control" name="productPrice" id="productPrice" value="{{data[2]}}" disabled>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="productQuantity">Cantidad:</label>
+					<input type="number" class="form-control" name="productQuantity" id="productQuantity" value="0" min="1" max="{{data[3]}}">
+				</div>
+				<div class="form-group">
+					<label for="productTotal">Total:</label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text bg-danger text-white">$</span>
+						</div>
+						<input type="text" class="form-control" name="productTotal" id="productTotal" value="0" readonly>
+					</div>
+				</div>
+                <button type="submit">Comprar</button> || <a href="/exit/{{data[4]}}/{{data[5]}}">Salir</a>
+				<input type="hidden" name="txtUsuario" value="{{data[4]}}">
+				<input type="hidden" name="precio" value="{{data[2]}}">
+				<input type="hidden" name="idP" value="{{data[0]}}">
+				<input type="hidden" name="idU" value="{{data[5]}}">
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Include jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script>
+    var max = "{{data[3]}}";
+	$(document).ready(function() {
+		// Update Total field when Quantity field changes
+		$("#productQuantity").change(function() {
+			var price = parseFloat($("#productPrice").val());
+			var quantity = parseInt($("#productQuantity").val());
+			quantity = Math.min(quantity, max); // Set maximum quantity to 10
+			var total = price * quantity;
+			$("#productQuantity").val(quantity);
+			$("#productTotal").val(total.toFixed(2));
+		});
+	});
+
+</script>
+
+</body>
+</html>

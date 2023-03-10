@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mongo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5 mb-5">Pedido</h1>
+    </div>
+
+    <div class="container">
+        <div>
+            <div>
+                <div class="card">
+                    <div class="card">
+                        <div class="card-header">
+                            Edicion del pedido
+                        </div>
+                        <div class="card-body">
+                            <div class="col">
+                                <li class="list-group-item mb-3">
+                                    <form action="/mongo/edit" method="post">
+                                        <input type="hidden" class="formcontrol" value="{{data[1]}}" name="idU">
+                                        <input type="text" class="formcontrol" value="{{data[2]}}" name="txtUsuario">
+                                        <small>estado:</small>
+                                        <label for="estado">Estado</label><br>
+                                        <input type="radio" id="Preparando" name="estado" value="Preparando">
+                                        <label for="Preparando">Preparando</label><br>
+                                        <input type="radio" id="En_Camino" name="estado" value="En_Camino">
+                                        <label for="En_Camino">En Camino</label><br>
+                                        <input type="radio" id="Retrasado" name="estado" value="Retrasado">
+                                        <label for="Retrasado">Retrasado</label><br>
+                                        <input type="radio" id="Entregado" name="estado" value="Entregado">
+                                        <label for="Entregado">Entregado</label><br>
+                                        <small>fecha Creada</small>
+                                        <input type="date" class="formcontrol" value="{{data[4]}}" name="fechaC">
+                                        <small>fecha entrega</small>
+                                        <input type="date" class="formcontrol" value="{{data[5]}}" name="fechaE">
+                                        <input type="text" name="txtId" id="txtId" value="{{data[0]}}" hidden>
+                                        <button type="submit">Editar</button>
+                                    </form>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var selectedOption = "{{data[3]}}";
+        var radioInput = document.getElementById(selectedOption);
+        radioInput.checked = true;
+    </script>
+</body>
+</html>

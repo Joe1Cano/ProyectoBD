@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        .table-primary thead th {
+      background-color: #007bff;
+      color: #fff;
+    }
+    /* Customize the table row colors */
+    tbody tr td:nth-child(even) {
+      background-color: #ffffff;
+    }
+    tbody tr td:nth-child(odd) {
+      background-color: #bff0ff;
+      color: #fff;
+    }
+    .table-hover tbody tr:hover {
+      background-color: #e2f0fc;
+    }
+    /* Customize the background color of the page */
+    body {
+      background-color: #f0f0f0;
+    }
+    /* Customize the color of the main heading */
+    h1 {
+      color: #007bff;
+    }
+    .navbar-custom {
+        background-color: #639bf0;
+      }
+      
+      .navbar-custom .navbar-brand,
+      .navbar-custom .navbar-nav .nav-link {
+        color: #fff;
+      }
+      
+      .navbar-custom .nav-link:hover {
+        color: #dbe2ef;
+      }
+  </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-custom">
+          <a class="navbar-brand" href="#">Tienda</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="/menu">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/inv">Inventario</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/mongo">Pedidos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/">Salir</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+    <div class="container">
+        <h1>Inventario Productos</h1>
+        <table class="table table-hover table-primary">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>URL</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in inv %}
+                <tr>
+                    <form action="/delete" method="post">
+                    <td>
+                        <input type="text" name="txtNombre" id="txtNombre" value="{{data[1]}}" disabled>
+                    </td>
+                    <td>
+                        <input type="text" name="txtprecio" id="txtprecio" value="{{data[2]}}" disabled>
+                    </td>
+                    <td>
+                        <input type="text" name="txtcantidad" id="txtcantidad" value="{{data[3]}}" disabled>
+                    </td>
+                    <td>
+                        <input type="text" name="txtUrl" id="txtUrl" value="{{data[4]}}" disabled>
+                    </td>
+                    <td>
+                        <a href="edit/{{data[0]}}" class="btn btn-info">Editar</a> || <a onclick="return confirm('Seguro que quieres borrar?')" href="delete/{{data[0]}}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                        <input type="text" name="" id="" value="{{data[0]}}" hidden>
+                    </form>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </Table>
+        <a href="/create"><button class="btn btn-success">Añadir producto</button></a>
+    </div>
+</body>
+</html>
