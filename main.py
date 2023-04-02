@@ -107,7 +107,7 @@ def proC():
     total = request.form["total"]
     user = request.form["user"]
 
-    url = "http://172.31.24.91:8018product"
+    url = "http://172.31.24.91:8018/product"
 
     payload = json.dumps({
         "id_user": id_u,
