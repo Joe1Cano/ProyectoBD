@@ -60,7 +60,7 @@ def pedioC(id):
 def proC():
     datos = []
     id = request.form["idP"]
-    url = "http://127.0.0.2/product_id/" + str(id)
+    url = "http://172.31.24.91:82/product_id/" + str(id)
     inv = requests.get(url)
     print(url)
     if inv.status_code == 200:
@@ -84,7 +84,7 @@ def proC():
     _Url = datos[4]
     id = datos[0]
 
-    url = "http://127.0.0.2/product/"+ str(id)
+    url = "http://172.31.24.91:82/product/"+ str(id)
 
     payload = json.dumps({
         "name": _Nombre,
@@ -107,7 +107,7 @@ def proC():
     total = request.form["total"]
     user = request.form["user"]
 
-    url = "http://127.0.0.4:8018/product"
+    url = "http://172.31.24.91:8018product"
 
     payload = json.dumps({
         "id_user": id_u,
@@ -188,7 +188,7 @@ def subT():
 @app.route("/menuC")
 def menuC():
     invent=[]
-    url = 'http://127.0.0.2'
+    url = 'http://172.31.24.91:82'
     inv = requests.get(url)
     if inv.status_code == 200:
         inv = inv.json()
@@ -226,7 +226,7 @@ def validar():
     _Correo = request.form["email"]
     _Password = request.form["password"]
 
-    url = 'http://127.0.0.3:801'
+    url = 'http://172.31.24.91:801'
     invent=[]
     response = requests.get(url)
 
@@ -283,7 +283,7 @@ def saveU():
     _Contrasena = request.form["password"]
     _Tipo = request.form["tipo"]
 
-    url = "http://127.0.0.3:801/product"
+    url = "http://172.31.24.91:801/product"
 
     payload = json.dumps({
         "name": _Nombre,
@@ -305,7 +305,7 @@ def saveU():
 @app.route('/inv')
 def inv():
     invent=[]
-    url = 'http://127.0.0.2'
+    url = 'http://172.31.24.91:82'
     inv = requests.get(url)
     if inv.status_code == 200:
         inv = inv.json()
@@ -326,7 +326,7 @@ def inv():
 
 @app.route('/delete/<int:id>')
 def delete(id):
-    url = 'http://127.0.0.2/product_id/'
+    url = 'http://172.31.24.91:82/product_id/'
     #return str(id)
     print(url)
     inv = requests.request("DELETE", url+str(id))
@@ -344,7 +344,7 @@ def store():
     _Cantidad = request.form["txtCantidad"]
     _Url = request.form["txtUrl"]
 
-    url = "http://127.0.0.2/product"
+    url = "http://172.31.24.91:82/product"
 
     payload = json.dumps({
         "name": _Nombre,
@@ -365,7 +365,7 @@ def store():
 @app.route('/edit/<int:id>')
 def edit(id):
     datos = []
-    url = "http://127.0.0.2/product_id/" + str(id)
+    url = "http://172.31.24.91:82/product_id/" + str(id)
     inv = requests.get(url)
     if inv.status_code == 200:
         inv = inv.json()
@@ -386,7 +386,7 @@ def update():
     _Url = request.form["txtUrl"]
     id = request.form["txtId"]
 
-    url = "http://127.0.0.2/product/"+ id
+    url = "http://172.31.24.91:82/product/"+ id
 
     payload = json.dumps({
         "name": _Nombre,
@@ -491,7 +491,7 @@ def editarM():
         return notFound()
 
 
-app.run(port=3380)
+app.run(port=3380, host="0.0.0.0")
 
 @app.errorhandler(404)
 def notFound(erro=None):
